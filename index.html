@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 스마트 맞춤 추천 및 견적기</title>
+  <style>
+    body { font-family: 'Pretendard', sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #f9f9f9; }
+    .card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    h2 { margin-top: 0; color: #333; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; margin-bottom: 6px; font-weight: bold; color: #555; }
+    input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #0056b3; }
+    #result { margin-top: 20px; padding: 16px; background: #eef6ff; border-radius: 6px; white-space: pre-line; line-height: 1.6; color: #222; display: none; }
+    .loading { text-align: center; color: #666; display: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>🤖 AI 맞춤 추천 & 견적 요청</h2>
+  
+  <div class="form-group">
+    <label for="budget">예산 범위</label>
+    <input type="text" id="budget" placeholder="예: 300만원 이하 / 1억원 안팎">
+  </div>
+
+  <div class="form-group">
+    <label for="purpose">사용 목적 및 조건</label>
+    <textarea id="purpose" rows="3" placeholder="예: 10평 소규모 팟캐스트 방송용 / 전시회 사용 LED 전광판"></textarea>
+  </div>
+
+  <button onclick="getRecommendation()">AI 추천 받기</button>
+
+  <div id="loading" class="loading">⏳ AI가 최적의 상품 조합을 계산 중입니다...</div>
+  <div id="result"></div>
+</div>
+
+<script>
+  // 1. 구글 AI 스튜디오에서 발급받은 API 키 입력
+  const API_KEY = "AQ.Ab8RN6Ju7-tnsU2qk4UHaKg9K4u3Hf_0AQNacpOkwYLh_y4wRg"; 
+
+  // 2. 내 사이트의 상품/매물 데이터 (JSON 형태)
+  const myProducts = [
+    { id: 1, name: "4K 라이브 스트리밍 카메라인", price: "120만원", category: "방송장비", desc: "소규모 스튜디오 및 1인 방송용 최적화" },
+    { id: 2, name: "USB 콘덴서 마이크 패키지", price: "35만원", category: "방송장비", desc: "선명한 음성 수음, 팟캐스트 및 보컬용" },
+    { id: 3, name: "방송용 LED 조명 2세트", price: "45만원", category: "방송장비", desc: "광량 조절 가능, 삼각대 포함" },
+    { id: 4, name: "강원도 영월 마당 넓은 구옥", price: "8,500만원", category: "시골집", desc: "대지 150평, 즉시 입주 가능, 배산임수" },
+    { id: 5, name: "충남 공주 리모델링 전원주택", price: "1억 2,000만원", category: "시골집", desc: "건평 25평, 텃밭 포함, 주차 2대 가능" }
+  ];
+
+  async function getRecommendation() {
+    const budget = document.getElementById('budget').value;
+    const purpose = document.getElementById('purpose').value;
+    const resultDiv = document.getElementById('result');
+    const loadingDiv = document.getElementById('loading');
+
+    if (!budget || !purpose) {
+      alert("예산과 목적을 모두 입력해주세요!");
+      return;
+    }
+
+    loadingDiv.style.display = "block";
+    resultDiv.style.display = "none";
+
+    // 3. AI에게 전달할 프롬프트 구성
+    const prompt = `
+      너는 내 웹사이트의 전문 견적 컨설턴트야.
+      
+      [내 데이터목록]
+      ${JSON.stringify(myProducts)}
+
+      [고객 조건]
+      - 예산: ${budget}
+      - 목적 및 요청사항: ${purpose}
+
+      위 [내 데이터목록] 중에서 고객 조건에 가장 어울리는 항목들을 선별해서 추천해줘.
+      응답 양식:
+      1. **추천 구성/매물 목록** (제품명 및 가격)
+      2. **총 예상 견적**
+      3. **이 조합/매물을 추천하는 이유** (친절하고 명확하게)
+    `;
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+
+      const data = await response.json();
+      const aiText = data.candidates[0].content.parts[0].text;
+
+      // 결과를 화면에 표시 (마크다운 볼드체 간단 변환)
+      resultDiv.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      resultDiv.style.display = "block";
+    } catch (error) {
+      alert("오류가 발생했습니다. API 키를 확인해주세요.");
+      console.error(error);
+    } finally {
+      loadingDiv.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>
