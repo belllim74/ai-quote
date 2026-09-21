@@ -39,17 +39,256 @@
 </div>
 
 <script>
-  // 1. 구글 AI 스튜디오에서 발급받은 API 키 입력
-  const API_KEY = "AQ.Ab8RN6Ju7-tnsU2qk4UHaKg9K4u3Hf_0AQNacpOkwYLh_y4wRg"; 
+  // 1. 구글 AI 스튜디오 API 키
+  const API_KEY = "AQ.Ab8RN6IOvqKAfhpWPxv5FDyqKmgIAFOeHWTHG0wPJgjdQIQB5w"; 
 
-  // 2. 내 사이트의 상품/매물 데이터 (JSON 형태)
+  // 2. 상품/매물 데이터
   const myProducts = [
-    { id: 1, name: "4K 라이브 스트리밍 카메라인", price: "120만원", category: "방송장비", desc: "소규모 스튜디오 및 1인 방송용 최적화" },
-    { id: 2, name: "USB 콘덴서 마이크 패키지", price: "35만원", category: "방송장비", desc: "선명한 음성 수음, 팟캐스트 및 보컬용" },
-    { id: 3, name: "방송용 LED 조명 2세트", price: "45만원", category: "방송장비", desc: "광량 조절 가능, 삼각대 포함" },
-    { id: 4, name: "강원도 영월 마당 넓은 구옥", price: "8,500만원", category: "시골집", desc: "대지 150평, 즉시 입주 가능, 배산임수" },
-    { id: 5, name: "충남 공주 리모델링 전원주택", price: "1억 2,000만원", category: "시골집", desc: "건평 25평, 텃밭 포함, 주차 2대 가능" }
-  ];
+  {
+    "name": "GiAi 지아이 NANO SLIM MRC ND 1000 Filter 72mm 나노 슬림 양면 (듀얼) 멀티 레이어 코팅 필터",
+    "price": "30000원"
+  },
+  {
+    "name": "GiAi 지아이 NANO SLIM MRC ND 1000 Filter 77mm 나노 슬림 양면 (듀얼) 멀티 레이어 코팅 필터",
+    "price": "32000원"
+  },
+  {
+    "name": "GiAi 지아이 NANO SLIM MRC ND 1000 Filter 82mm 나노 슬림 양면 (듀얼) 멀티 레이어 코팅 필터",
+    "price": "35000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/8 Filter 82mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "76000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/8 Filter 77mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "70000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/8 Filter 72mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "66000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/4 Filter 82mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "76000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/4 Filter 77mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "70000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/4 Filter 72mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "66000원"
+  },
+  {
+    "name": "GiAi 지아이 SLIM MC BlackMist 1/4 Filter 67mm/슬림 다층코팅 블랙미스트 필터",
+    "price": "61000원"
+  },
+  {
+    "name": "GAZE 게이즈 GMK-K320P AI 자동추적 PTZ 카메라 광학20x FULL-HD POE HDMI.SDI USB IP 온라인예배 강의",
+    "price": "750000원"
+  },
+  {
+    "name": "GAZE 게이즈 GMK-K320P AI 자동추적 PTZ 카메라 GMK-KB02 컨트롤룸 세트",
+    "price": "1100000원"
+  },
+  {
+    "name": "GAZE 게이즈 GMK-K320P AI 자동추적 PTZ 카메라 GMK-KB02 컨트롤룸 세트 2번째",
+    "price": "1690000원"
+  },
+  {
+    "name": "GAZE GMK-G220VS 오토 트래킹 4K EPTZ 웹캠 4K CMOS센서 얼굴인식 110도 와이드앵글",
+    "price": "330000원"
+  },
+  {
+    "name": "게이즈 GAZE GE140B 포터블 올인원 FHD 화상회의 웹캠",
+    "price": "280000원"
+  },
+  {
+    "name": "GAZE 게이즈 AMC-G420S 20X 4K UHD PTZ 카메라 (출력 HDMI,3G-SDI,USB3.0,IP,POE지원) 벽부형 브라켓 포함",
+    "price": "780000원"
+  },
+  {
+    "name": "GAZE HS-A3 4K UHD 12X PTZ 카메라 (HDMI,3G-SDI,USB3.0,IP,POE) 온라인예배 화상회의",
+    "price": "650000원"
+  },
+  {
+    "name": "GAZE HS-A3 4K UHD 12X PTZ 카메라 (HDMI,3G-SDI,USB3.0,IP,POE) 온라인예배 화상회의 브라켓 포함",
+    "price": "760000원"
+  },
+  {
+    "name": "GAZE 게이즈 HS-A4 4K UHD 30X PTZ 카메라 HDMI 3G-SDI USB3.0 IP POE지원 벽부형 브라켓 포함 온라인예배 화상회의",
+    "price": "850000원"
+  },
+  {
+    "name": "필월드 Feelworld LIVE PRO L1 4채널 미니 카메라 비디오 믹서 스위처 터치 PTZ제어 4K 입력 라이브스트리밍",
+    "price": "588000원"
+  },
+  {
+    "name": "필월드 Feelworld LIVE PRO L4 라이브 프로 스위처 10인치 터치스크린",
+    "price": "759000원"
+  },
+  {
+    "name": "필월드 Feelworld LIVE PRO L1 V1 라이브 프로",
+    "price": "440000원"
+  },
+  {
+    "name": "필월드 Feelworld LIVE PRO L1 Plus 프리뷰 모니터 3G-SDI, 4K HDMI 60Hz 알루미늄 하우징 국내정식판매점",
+    "price": "440000원"
+  },
+  {
+    "name": "필월드 Feelworld P6XL FULL HD 터치 스크린 올인원 프리뷰모니터 국내정식판매점",
+    "price": "398000원"
+  },
+  {
+    "name": "필월드 FEELWORLD Live Pro L2 PLUS 4채널 HDMI 스위처",
+    "price": "310000원"
+  },
+  {
+    "name": "필월드 Feelworld W1000H 무선영상전송기 W1000S 4K HDMI/3G-SDI 최대300m 실시간 스트리밍 국내정식판매점",
+    "price": "670000원"
+  },
+  {
+    "name": "필월드 FEELWORLD PS5 5.5인치 OLED 4K HDMI 터치 필드 모니터 DJI RS시리즈 장착 가능 국내정식판매점",
+    "price": "580000원"
+  },
+  {
+    "name": "필월드 FEELWORLD CUT6 6인치 4K HDMI 60Hz 입력출력 USB-C 플러그 앤 플레이 스트리밍 게이밍 캡쳐 모니터",
+    "price": "363000원"
+  },
+  {
+    "name": "SEETEC P215 PRO-CO 21.5인치 1000nit 고휘도 방송 디렉터 모니터 국내정식판매점",
+    "price": "160000원"
+  },
+  {
+    "name": "Nitze OSEE G7 PRO 오씨 액세서리 케이지 썬후드 핸들",
+    "price": "1540000원"
+  },
+  {
+    "name": "니치 NITZE T-D02C Mounting Kit FOR DJI 포커스 프로 LiDAR and 포커스 프로 모니터",
+    "price": "95000원"
+  },
+  {
+    "name": "니치 NITZE N28-S1 Monitor Holder For DJI Gimbals RS4",
+    "price": "125000원"
+  },
+  {
+    "name": "니치 NITZE N51-A1 퀵 릴리스 마운트 - 삼각대 매직암 카메라 프리뷰모니터외",
+    "price": "93000원"
+  },
+  {
+    "name": "니치 NITZE PA28-A QR NATO 클램프 및 NATO 레일이 있는 스팅어 핸들",
+    "price": "58000원"
+  },
+  {
+    "name": "니치 NITZE PA28-BK Stinger 핸들 (ARRI 위치 고정 핀 포함) 정식 수입품",
+    "price": "98000원"
+  },
+  {
+    "name": "니치 NITZE PA29A ARRI 로제트 사이드 핸들 인체공학적 양면 핸들 정식수입품",
+    "price": "98000원"
+  },
+  {
+    "name": "니치 NITZE 15mm LWS Lens Support N04B 렌즈 서포트 정식수입품",
+    "price": "63000원"
+  },
+  {
+    "name": "니치 NITZE JT-A04C Monitor Yoke Set with Top Handle (Atomos SUMO19 SUMO19M) 정식수입품",
+    "price": "72000원"
+  },
+  {
+    "name": "니치 NITZE JT-B02B For Blackmagic Video Assist 7 3G Video Assist 7 5G Monitor 용 케이지 정식수입품",
+    "price": "238000원"
+  },
+  {
+    "name": "니치 NITZE JT-I03B Cage for Portkeys LH7P LH7H 7 썬후드 포함 (포트키 LH7H LH7P 모니터 케이지)정식수입품",
+    "price": "123000원"
+  },
+  {
+    "name": "니치 NITZE N54-F1 ELF Series Monitor Holder 모니터 퀵 릴리스 홀더 정식수입품",
+    "price": "135000원"
+  },
+  {
+    "name": "니치 NITZE JT-S02B CAGE FOR SMALLHD INDIE 7 702TOUCH 7인치 MONITOR (썬후드 나토레일 콜드슈 포함)정식수입품",
+    "price": "30000원"
+  },
+  {
+    "name": "니치 NITZE 디렉터 모니터 케이지 카본 핸들 JSQ-003 정식수입품",
+    "price": "135000원"
+  },
+  {
+    "name": "니치 NITZE 디렉터 모니터 케이지 일반 알루미늄 핸들 JSQ-002 정식수입품",
+    "price": "215000원"
+  },
+  {
+    "name": "니치 NITZE JT-A02B Cage Kit for Atomos Ninja V/Ninja V+ Ninja Ninja 울트라 Shinobi Monitor",
+    "price": "170000원"
+  },
+  {
+    "name": "니치 NITZE N54-S1 Quick Release Camera Monitor Mount 정식 수입품",
+    "price": "130000원"
+  },
+  {
+    "name": "니치 NITZE JSQ-006B VESA 마운트 회전 및 기울기 조절식 모니터 스탠드 JSQ-006B",
+    "price": "59000원"
+  },
+  {
+    "name": "니치 NITZE G7-Kit Cage for OSEE G7 7 (썬후드 . 스트랩 . 모니터용 슈 헤드 포함) 정식수입품",
+    "price": "180000원"
+  },
+  {
+    "name": "니치 NITZE V마운트 배터리 플레이트 N21-D8A (USB-C3.0 In-Output, DC 8V3A, D-tap 11-17V) 정식수입품",
+    "price": "219000원"
+  },
+  {
+    "name": "니치 NITZE N21-D8B V마운트 배터리 플레이트 15mm 로드클램프 포함 60W USB-C PD3.0 정식수입품",
+    "price": "130000원"
+  },
+  {
+    "name": "니치 NITZE Cage sony FX3 FX30 body cage 소니 FX3 FX30 바디 전용 카메라 케이지",
+    "price": "160000원"
+  },
+  {
+    "name": "니치 NITZE ARRI 로제트 PA36A-1 사이드 우드 핸들 - 블랙",
+    "price": "88000원"
+  },
+  {
+    "name": "니치 NITZE ARRI 로제트 PA36A-2 사이드 우드 핸들 - 실버",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE 1/4 듀얼 스크류 PA36B-1 사이드 우드 핸들 - 블랙",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE 1/4 듀얼 스크류 PA36B-2 사이드 우드 핸들 - 실버",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE 나토 사이드 우드 핸들 PA36D-1 블랙",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE 나토 사이드 우드 핸들 PA36D-2 실버",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE 3/8 로케이팅 사이드 우드 핸들 PA36E-1 블랙",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE 3/8 로케이팅 사이드 우드 핸들 PA36E-2 실버",
+    "price": "89000원"
+  },
+  {
+    "name": "니치 NITZE Portkeys LH5C 모니터 케이지 JT-I07B (썬후드 포함)",
+    "price": "105000원"
+  },
+  {
+    "name": "MS500(실내용, 실외용)",
+    "price": "700000원"
+  }
+];
 
   async function getRecommendation() {
     const budget = document.getElementById('budget').value;
@@ -65,7 +304,6 @@
     loadingDiv.style.display = "block";
     resultDiv.style.display = "none";
 
-    // 3. AI에게 전달할 프롬프트 구성
     const prompt = `
       너는 내 웹사이트의 전문 견적 컨설턴트야.
       
@@ -83,23 +321,44 @@
       3. **이 조합/매물을 추천하는 이유** (친절하고 명확하게)
     `;
 
+    // 최신 v1 및 v1beta 앤드포인트 자동 호환 처리
+    const endpoints = [
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`
+    ];
+
+    let response = null;
+    let data = null;
+
+    for (const url of endpoints) {
+      try {
+        response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }]
+          })
+        });
+
+        if (response.ok) {
+          data = await response.json();
+          break;
+        }
+      } catch (e) {
+        console.warn("API 시도 중 예외 발생:", e);
+      }
+    }
+
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }]
-        })
-      });
-
-      const data = await response.json();
-      const aiText = data.candidates[0].content.parts[0].text;
-
-      // 결과를 화면에 표시 (마크다운 볼드체 간단 변환)
-      resultDiv.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      resultDiv.style.display = "block";
+      if (data && data.candidates && data.candidates[0].content.parts[0].text) {
+        const aiText = data.candidates[0].content.parts[0].text;
+        resultDiv.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        resultDiv.style.display = "block";
+      } else {
+        throw new Error("API 응답 구조 실패");
+      }
     } catch (error) {
-      alert("오류가 발생했습니다. API 키를 확인해주세요.");
+      alert("오류가 발생했습니다. 구글 AI 스튜디오에서 키 권한 상태를 확인해주세요.");
       console.error(error);
     } finally {
       loadingDiv.style.display = "none";
